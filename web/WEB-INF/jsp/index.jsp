@@ -28,13 +28,14 @@
                 text-align: center;
             }
         </style>
+
     </head>
     <body>
 
         <div class="container">
 
             <div class="col-md-12 header">
-                <h1 align="center"><a href="<%= request.getContextPath() %>/">Spring Inventory</a></h1>
+                <h1 align="center"><a href="<%= request.getContextPath()%>/">Spring Inventory</a></h1>
             </div>
 
             <div class="col-md-12 menu">
@@ -49,9 +50,9 @@
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="<%= request.getContextPath() %>/"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a href="<%= request.getContextPath() %>/product"><i class="fa fa-paypal"></i> Insert Product</a></li>
-                                <li><a href="<%= request.getContextPath() %>/customer"><i class="fa fa-user-plus"></i> Register Customer</a></li> 
+                                <li class="active"><a href="<%= request.getContextPath()%>/"><i class="fa fa-home"></i> Home</a></li>
+                                <li><a href="<%= request.getContextPath()%>/product"><i class="fa fa-paypal"></i> Insert Product</a></li>
+                                <li><a href="<%= request.getContextPath()%>/customer"><i class="fa fa-user-plus"></i> Register Customer</a></li> 
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -80,84 +81,97 @@
 
             </div>
 
-            <div class="student_form col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 align="center"><i class="fa fa-user-plus"></i> Insert Student</h3>
-                    </div>
-                    <div class="panel-body">
-                        <c:if test="${student.id != null}">
-                            <form action="<%= request.getContextPath()%>/updateStudent" method="post">
-                            </c:if>
-                            <c:if test="${student.id == null}">
-                                <form action="<%= request.getContextPath()%>/addStudent" method="post">
-                                </c:if>
-                                <div class="form-group">
-                                    <label for="id">ID: </label>
-                                    <input value="${student.id}" name="id" type="text" class="form-control" id="id" <c:if test="${id == null}">disabled="1"</c:if>" readonly="1">
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label for="name">Name:</label>
-                                        <input value="${student.name}" name="name" type="text" class="form-control" id="name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="age">Age:</label>
-                                    <input value="${student.age}" name="age" type="text" class="form-control" id="age">
-                                </div>
-
-                                <c:if test="${student.id != null}">
-                                    <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Update</button>
-                                    <a href="<%= request.getContextPath()%>" class="btn btn-primary pull-right"><i class="fa fa-user-plus"></i> New</a>
-                                </c:if>
-
-                                <c:if test="${student.id == null}">
-                                    <button type="submit" class="btn btn-success"><i class="fa fa-send"></i> Submit</button>
-                                </c:if>
-
-
-                            </form>
-
-                    </div>
-                    <div class="panel-footer">
-
+            <fom name="orderForm">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            Order No: <input type="text" class="form-control" value="${orderNo}"/>
+                        </div>
+                        <div class="col-md-4">
+                            Order Type: 
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="orderType">Sell
+                                </label> &nbsp; &nbsp; &nbsp;
+                                <label>
+                                    <input type="radio" name="orderType">Purchase
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            Order Date: <input type="date" class="form-control"/>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="header col-md-8">
-                <table class="table table-bordered table-responsive table-striped">
-                    <thead>
-                        <tr>
-                            <th colspan="5" style="text-align: center;"><h2><i class="fa fa-users"></i> Students List</h2></th>
-                        </tr>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th colspan="2">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="row" items="${students}">
-                            <tr>
-                                <td>${row.id}</td>
-                                <td>${row.name}</td>
-                                <td>${row.age}</td>
-                                <td>
-                                    <a href="<%= request.getContextPath()%>/editStudent/${row.id}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
-                                </td>
-                                <td>
-                                    <a onclick="return confirm('Are you want to delete this item?')" href="<%= request.getContextPath()%>/deleteStudent/${row.id}" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </div>
+                <div class="col-md-12"  style="margin-top: 20px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <i class="fa fa-product-hunt"></i> Select Product
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="Product Name">Product Name:</label>
+                                        <select name="pname" class="form-control" onChange="sendInfo()">
+                                            <option>--- Select Product --</option>
+                                            <c:forEach var="pRow" items="${products}">
+                                                <option value="${pRow.pid}">${pRow.pname}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Price: </label>
+                                        <input type="text" class="form-control" id="price">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="qty">Stock: </label>
+                                        <input type="text" class="form-control" id="qty">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <i class="fa fa-user-circle"></i> Select Customer
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="Customer Name">Customer Name:</label>
+                                        <select class="form-control">
+                                            <option>--- Select Customer --</option>
+                                            <c:forEach var="cRow" items="${customers}">
+                                                <option value="${cRow.cid}">${cRow.cname}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone: </label>
+                                        <input type="text" class="form-control" id="phone">
+                                    </div>
 
-            <div class="col-md-12" style="text-align: center;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <i class="fa fa-sellsy"></i> Order Details
+                                </div>
+                                <div class="panel-body">
+                                    Total: 
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fom>
+
+            <div class="col-md-12" style="text-align: center; margin-top: 60px;">
                 &copy; Zubayer Ahamed
                 || <a href="https://www.youtube.com/channel/UC4vVj7lKO7H4FohB3lv9dzA" target="_blank">Youtube</a>  || <a href="http://www.facebook.com/zubayerahamed" target="_blank">Facebook</a>
             </div>
