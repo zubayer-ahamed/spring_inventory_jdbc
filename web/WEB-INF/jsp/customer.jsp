@@ -34,7 +34,7 @@
         <div class="container">
 
             <div class="col-md-12 header">
-                <h1 align="center"><a href="<%= request.getContextPath() %>/">Spring Inventory</a></h1>
+                <h1 align="center"><a href="<%= request.getContextPath()%>/">Spring Inventory</a></h1>
             </div>
 
             <div class="col-md-12 menu">
@@ -49,9 +49,9 @@
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">
-                                <li><a href="<%= request.getContextPath() %>/"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a href="<%= request.getContextPath() %>/product"><i class="fa fa-paypal"></i> Insert Product</a></li>
-                                <li class="active"><a href="<%= request.getContextPath() %>/customer"><i class="fa fa-user-plus"></i> Register Customer</a></li> 
+                                <li><a href="<%= request.getContextPath()%>/"><i class="fa fa-home"></i> Home</a></li>
+                                <li><a href="<%= request.getContextPath()%>/product"><i class="fa fa-paypal"></i> Insert Product</a></li>
+                                <li class="active"><a href="<%= request.getContextPath()%>/customer"><i class="fa fa-user-plus"></i> Register Customer</a></li> 
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -94,7 +94,7 @@
                                 </c:if>
                                 <div class="form-group">
                                     <label for="cid">Customer ID: </label>
-                                    <input value="${customer.cid}" name="cid" type="text" class="form-control" id="cid" <c:if test="${cid == null}">disabled="1"</c:if>" readonly="1">
+                                    <input value="${customer.cid}" name="cid" type="text" class="form-control" id="cid" <c:if test="${customer.cid == null}">disabled="1"</c:if>" readonly="1">
                                     </div>
 
                                     <div class="form-group">
@@ -109,7 +109,7 @@
 
                                 <c:if test="${customer.cid != null}">
                                     <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Update</button>
-                                    <a href="<%= request.getContextPath()%>" class="btn btn-primary pull-right"><i class="fa fa-user-plus"></i> New</a>
+                                    <a href="<%= request.getContextPath()%>/customer" class="btn btn-primary pull-right"><i class="fa fa-user-plus"></i> New</a>
                                 </c:if>
 
                                 <c:if test="${customer.cid == null}">
