@@ -17,11 +17,6 @@ public class PageController {
         return "index";
     }
     
-    @RequestMapping("/product")
-    public String productPage(){
-        return "product";
-    }
-    
     @RequestMapping("/customer")
     public String customerPage(){
         return "customer";
