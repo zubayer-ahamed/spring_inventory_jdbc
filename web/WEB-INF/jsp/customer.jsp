@@ -49,9 +49,9 @@
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="<%= request.getContextPath() %>/"><i class="fa fa-home"></i> Home</a></li>
+                                <li><a href="<%= request.getContextPath() %>/"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a href="<%= request.getContextPath() %>/product"><i class="fa fa-paypal"></i> Insert Product</a></li>
-                                <li><a href="<%= request.getContextPath() %>/customer"><i class="fa fa-user-plus"></i> Register Customer</a></li> 
+                                <li class="active"><a href="<%= request.getContextPath() %>/customer"><i class="fa fa-user-plus"></i> Register Customer</a></li> 
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -83,36 +83,36 @@
             <div class="student_form col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 align="center"><i class="fa fa-user-plus"></i> Insert Student</h3>
+                        <h3 align="center"><i class="fa fa-user-plus"></i> Register Customer</h3>
                     </div>
                     <div class="panel-body">
-                        <c:if test="${student.id != null}">
-                            <form action="<%= request.getContextPath()%>/updateStudent" method="post">
+                        <c:if test="${customer.cid != null}">
+                            <form action="<%= request.getContextPath()%>/updateCustomer" method="post">
                             </c:if>
-                            <c:if test="${student.id == null}">
-                                <form action="<%= request.getContextPath()%>/addStudent" method="post">
+                            <c:if test="${customer.cid == null}">
+                                <form action="<%= request.getContextPath()%>/addCustomer" method="post">
                                 </c:if>
                                 <div class="form-group">
-                                    <label for="id">ID: </label>
-                                    <input value="${student.id}" name="id" type="text" class="form-control" id="id" <c:if test="${id == null}">disabled="1"</c:if>" readonly="1">
+                                    <label for="cid">Customer ID: </label>
+                                    <input value="${customer.cid}" name="cid" type="text" class="form-control" id="cid" <c:if test="${cid == null}">disabled="1"</c:if>" readonly="1">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="name">Name:</label>
-                                        <input value="${student.name}" name="name" type="text" class="form-control" id="name">
+                                        <label for="cname">Name:</label>
+                                        <input value="${customer.cname}" name="cname" type="text" class="form-control" id="cname">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="age">Age:</label>
-                                    <input value="${student.age}" name="age" type="text" class="form-control" id="age">
+                                    <label for="phone">Phone:</label>
+                                    <input value="${customer.phone}" name="phone" type="text" class="form-control" id="phone">
                                 </div>
 
-                                <c:if test="${student.id != null}">
+                                <c:if test="${customer.cid != null}">
                                     <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Update</button>
                                     <a href="<%= request.getContextPath()%>" class="btn btn-primary pull-right"><i class="fa fa-user-plus"></i> New</a>
                                 </c:if>
 
-                                <c:if test="${student.id == null}">
+                                <c:if test="${customer.cid == null}">
                                     <button type="submit" class="btn btn-success"><i class="fa fa-send"></i> Submit</button>
                                 </c:if>
 
@@ -130,26 +130,26 @@
                 <table class="table table-bordered table-responsive table-striped">
                     <thead>
                         <tr>
-                            <th colspan="5" style="text-align: center;"><h2><i class="fa fa-users"></i> Students List</h2></th>
+                            <th colspan="5" style="text-align: center;"><h2><i class="fa fa-users"></i> Customer List</h2></th>
                         </tr>
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Age</th>
+                            <th>Phone</th>
                             <th colspan="2">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="row" items="${students}">
+                        <c:forEach var="row" items="${customers}">
                             <tr>
-                                <td>${row.id}</td>
-                                <td>${row.name}</td>
-                                <td>${row.age}</td>
+                                <td>${row.cid}</td>
+                                <td>${row.cname}</td>
+                                <td>${row.phone}</td>
                                 <td>
-                                    <a href="<%= request.getContextPath()%>/editStudent/${row.id}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
+                                    <a href="<%= request.getContextPath()%>/editCustomer/${row.cid}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
                                 </td>
                                 <td>
-                                    <a onclick="return confirm('Are you want to delete this item?')" href="<%= request.getContextPath()%>/deleteStudent/${row.id}" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                                    <a onclick="return confirm('Are you want to delete this item?')" href="<%= request.getContextPath()%>/deleteCustomer/${row.cid}" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
