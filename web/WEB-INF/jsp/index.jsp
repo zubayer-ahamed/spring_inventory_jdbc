@@ -8,7 +8,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -16,10 +16,14 @@
         <spring:url value="/resources/css/font-awesome.css" var="fontawesomeCSS"/>
         <spring:url value="/resources/js/jquery.min.js" var="jqueryJS"/>
         <spring:url value="/resources/js/bootstrap.js" var="bootstrapJS"/>
+        <spring:url value="/resources/js/angular.min.js" var="angularJS"/>
+        <spring:url value="/resources/js/my_app.js" var="myAppJS"/>
         <link rel="stylesheet" type="text/css" href="${bootstrapCSS}"/>
         <link rel="stylesheet" type="text/css" href="${fontawesomeCSS}"/>
         <script src="${jqueryJS}"></script>
         <script src="${bootstrapJS}"></script>
+        <script src="${angularJS}"></script>
+        <script src="${myAppJS}"></script>
         <style type="text/css">
             .header, .message{
                 margin-bottom: 20px;
@@ -30,8 +34,7 @@
         </style>
 
     </head>
-    <body>
-
+    <body ng-controller="appCtrl">
         <div class="container">
 
             <div class="col-md-12 header">
@@ -105,7 +108,12 @@
                     </div>
                 </div>
 
+
+
+
+
                 <div class="col-md-12"  style="margin-top: 20px;">
+
                     <div class="row">
                         <div class="col-md-4">
                             <div class="panel panel-primary">
@@ -115,20 +123,18 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label for="Product Name">Product Name:</label>
-                                        <select name="pname" class="form-control" onChange="sendInfo()">
-                                            <option>--- Select Product --</option>
-                                            <c:forEach var="pRow" items="${products}">
-                                                <option value="${pRow.pid}">${pRow.pname}</option>
-                                            </c:forEach>
+                                        <select class="form-control" ng-model="clickedProduct" ng-options="product.pname for product in products">
+
                                         </select>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="price">Price: </label>
-                                        <input type="text" class="form-control" id="price">
+                                        <input type="text" class="form-control" id="price" value="{{clickedProduct.price}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="qty">Stock: </label>
-                                        <input type="text" class="form-control" id="qty">
+                                        <input type="text" class="form-control" id="qty" value="{{clickedProduct.qty}}">
                                     </div>
                                 </div>
                             </div>
@@ -141,16 +147,12 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label for="Customer Name">Customer Name:</label>
-                                        <select class="form-control">
-                                            <option>--- Select Customer --</option>
-                                            <c:forEach var="cRow" items="${customers}">
-                                                <option value="${cRow.cid}">${cRow.cname}</option>
-                                            </c:forEach>
+                                        <select class="form-control" ng-model="clickedCustomer" ng-options="customer.cname for customer in customers">
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone: </label>
-                                        <input type="text" class="form-control" id="phone">
+                                        <input type="text" class="form-control" id="phone" value="{{clickedCustomer.phone}}">
                                     </div>
 
                                 </div>
