@@ -217,7 +217,7 @@
                             <tfoot>
                                 <tr>
                                     <td colspan="5" style="text-align: right">Final Total:</td>
-                                    <td>600</td>
+                                    <td>{{finalTotal}}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="6" style="text-align: right">

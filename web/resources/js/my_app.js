@@ -5,6 +5,7 @@ myApp.controller("appCtrl", function ($scope, $http) {
     $scope.oid = "";
     $scope.orderType = "";
     $scope.orderDate = "";
+    $scope.finalTotal = 0;
 
     //get All Product
     $scope.getAllProduct = function () {
@@ -47,7 +48,7 @@ myApp.controller("appCtrl", function ($scope, $http) {
     $scope.addToCart = function () {
         $scope.clickedProduct.qty = $scope.qty;
         $scope.status = true;
-
+        
         if ($scope.cartProduct.length === 0) {
             $scope.cartProduct.push($scope.clickedProduct);
             $scope.status = false;
@@ -64,6 +65,11 @@ myApp.controller("appCtrl", function ($scope, $http) {
 
         if ($scope.status === true) {
             $scope.cartProduct.push($scope.clickedProduct);
+        }
+        
+        $scope.finalTotal = 0;
+        for (var i = 0; i <  $scope.cartProduct.length; i++) {
+            $scope.finalTotal = $scope.finalTotal + ($scope.cartProduct[i].price * $scope.cartProduct[i].qty);
         }
 
         $scope.qty = 0;
@@ -84,25 +90,27 @@ myApp.controller("appCtrl", function ($scope, $http) {
 
 
     //CheckOut
-    $scope.checkOut = function(){
+    $scope.checkOut = function () {
         alert(
-                "order No: " + $scope.oid + 
-                "\n Order Type" + $scope.orderType + 
-                "\n Order Date" + $scope.orderDate
-               );
-       
-       for(var i = 0; i < $scope.cartProduct.length; i++){
-           alert(
-                   "PID: " + $scope.cartProduct[i].pid +
-                   "\nPName: " + $scope.cartProduct[i].pname +
-                   "\nPrice: " + $scope.cartProduct[i].price +
-                   "\nQty: " + $scope.cartProduct[i].qty 
-                   
+                "order No: " + $scope.oid +
+                "\n Customer ID: " + $scope.clickedCustomer.cid +
+                "\n Order Type: " + $scope.orderType +
+                "\n Order Date: " + $scope.orderDate +
+                "\n Final Total: " + $scope.finalTotal 
+                );
+
+        for (var i = 0; i < $scope.cartProduct.length; i++) {
+            alert(
+                    "PID: " + $scope.cartProduct[i].pid +
+                    "\nPName: " + $scope.cartProduct[i].pname +
+                    "\nPrice: " + $scope.cartProduct[i].price +
+                    "\nQty: " + $scope.cartProduct[i].qty
+
                     );
-       }
+        }
     };
 
-
+    
 
 
 
