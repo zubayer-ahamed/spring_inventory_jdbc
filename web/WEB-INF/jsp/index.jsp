@@ -35,6 +35,10 @@
 
     </head>
     <body ng-controller="appCtrl">
+        
+        
+        
+        
         <div class="container">
 
             <div class="col-md-12 header">
@@ -89,7 +93,6 @@
                 <div class="row">
                     <div class="col-md-4">
                         Order No: <input name="oid" type="text" class="form-control" ng-model="oid = ${orderNo}" value="${orderNo}"/>
-                        {{oid}}
                     </div>
                     <div class="col-md-4">
                         Order Type: 
@@ -101,11 +104,9 @@
                                 <input type="radio" name="orderType" ng-model="orderType" value="purchase">Purchase
                             </label>
                         </div>
-                        {{orderType}}
                     </div>
                     <div class="col-md-4">
                         Order Date: <input ng-model="orderDate" name="orderDate" type="date" class="form-control"/>
-                        {{orderDate}}
                     </div>
                 </div>
             </div>
@@ -215,13 +216,13 @@
                                 </tr>
                             </tbody>
                             <tfoot>
-                                <tr>
+                                <tr ng-show="cartProduct.length != 0">
                                     <td colspan="5" style="text-align: right">Final Total:</td>
                                     <td>{{finalTotal}}</td>
                                 </tr>
-                                <tr>
+                                <tr ng-show="cartProduct.length != 0">
                                     <td colspan="6" style="text-align: right">
-                                        <a ng-click="checkOut()" href="" ng-show="cartProduct.length != 0" class="btn btn-success"><i class="fa fa-check"></i> Check Out</a>
+                                        <a ng-click="checkOut()" href="<%= request.getContextPath() %>" ng-show="cartProduct.length != 0" class="btn btn-success"><i class="fa fa-check"></i> Check Out</a>
                                     </td>
                                 </tr>
                             </tfoot>
