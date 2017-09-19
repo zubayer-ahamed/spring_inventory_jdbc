@@ -85,93 +85,150 @@
             </div>
 
 
-            <fom name="orderForm">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-4">
-                            Order No: <input type="text" class="form-control" value="${orderNo}"/>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        Order No: <input name="oid" type="text" class="form-control" ng-model="oid = ${orderNo}" value="${orderNo}"/>
+                        {{oid}}
+                    </div>
+                    <div class="col-md-4">
+                        Order Type: 
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="orderType" ng-model="orderType" value="sell">Sell
+                            </label> &nbsp; &nbsp; &nbsp;
+                            <label>
+                                <input type="radio" name="orderType" ng-model="orderType" value="purchase">Purchase
+                            </label>
                         </div>
-                        <div class="col-md-4">
-                            Order Type: 
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="orderType">Sell
-                                </label> &nbsp; &nbsp; &nbsp;
-                                <label>
-                                    <input type="radio" name="orderType">Purchase
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            Order Date: <input type="date" class="form-control"/>
-                        </div>
+                        {{orderType}}
+                    </div>
+                    <div class="col-md-4">
+                        Order Date: <input ng-model="orderDate" name="orderDate" type="date" class="form-control"/>
+                        {{orderDate}}
                     </div>
                 </div>
+            </div>
 
 
 
 
 
-                <div class="col-md-12"  style="margin-top: 20px;">
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <i class="fa fa-product-hunt"></i> Select Product
-                                </div>
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label for="Product Name">Product Name:</label>
-                                        <select class="form-control" ng-model="clickedProduct" ng-options="product.pname for product in products">
-
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="price">Price: </label>
-                                        <input type="text" class="form-control" id="price" value="{{clickedProduct.price}}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="qty">Stock: </label>
-                                        <input type="text" class="form-control" id="qty" value="{{clickedProduct.qty}}">
-                                    </div>
-                                </div>
+            <div class="col-md-12"  style="margin-top: 20px;">
+                <div class="row">
+                    <div class="col-md-4" style="height: 360px;">
+                        <div class="panel panel-primary" style="height: 100%">
+                            <div class="panel-heading">
+                                <i class="fa fa-product-hunt"></i> Select Product
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <i class="fa fa-user-circle"></i> Select Customer
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="Product Name">Product Name:</label>
+                                    <select name="pname" class="form-control" ng-model="clickedProduct" ng-options="product.pname for product in products">
+                                    </select>
                                 </div>
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label for="Customer Name">Customer Name:</label>
-                                        <select class="form-control" ng-model="clickedCustomer" ng-options="customer.cname for customer in customers">
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="phone">Phone: </label>
-                                        <input type="text" class="form-control" id="phone" value="{{clickedCustomer.phone}}">
-                                    </div>
-
+                                <div class="form-group">
+                                    <label for="pid">Product ID: </label>
+                                    <input readonly="1" name="pid" type="text" class="form-control" id="pid" value="{{clickedProduct.pid}}">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <i class="fa fa-sellsy"></i> Order Details
+                                <div class="form-group">
+                                    <label for="price">Price: </label>
+                                    <input readonly="1" name="price" type="text" class="form-control" id="price" value="{{clickedProduct.price}}">
                                 </div>
-                                <div class="panel-body">
-                                    Total: 
-
+                                <div class="form-group">
+                                    <label for="qty">Stock: </label>
+                                    <input readonly="1" name="qty" type="text" class="form-control" id="qty" value="{{clickedProduct.qty}}">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4" style="height: 360px;">
+                        <div class="panel panel-primary" style="height: 100%">
+                            <div class="panel-heading">
+                                <i class="fa fa-user-circle"></i> Select Customer
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="Customer Name">Customer Name:</label>
+                                    <select name="cname" class="form-control" ng-model="clickedCustomer" ng-options="customer.cname for customer in customers">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cid">Customer ID: </label>
+                                    <input readonly="1" name="cid" type="text" class="form-control" id="cid" value="{{clickedCustomer.cid}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone: </label>
+                                    <input readonly="1" name="phone" type="text" class="form-control" id="phone" value="{{clickedCustomer.phone}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="height: 360px;">
+                        <div class="panel panel-primary" style="height: 100%">
+                            <div class="panel-heading">
+                                <i class="fa fa-sellsy"></i> Order Details
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="qty">Quantity:</label>
+                                    <input name="orderQty" ng-model="qty" type="text" class="form-control" id="qty" placeholder="Enter Quantity">
+                                </div>
+                                <div class="form-group" ng-show="qty != 0">
+                                    <label for="total">Total:</label>
+                                    <input readonly="1" name="total" value="{{clickedProduct.price * qty}}" type="text" class="form-control" id="total">
+                                </div>
+                                <div class="form-group"> 
+                                    <button ng-click="addToCart()" type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </fom>
+            </div>
+
+            <div class="col-md-12" style="text-align: center; margin-top: 60px;">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3><i class="fa fa-cart-plus"></i> Cart <button class="btn btn-sm btn-success"> {{cartProduct.length}} </button></h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered table-striped table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="product in cartProduct">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{product.pname}}</td>
+                                    <td>{{product.price}}</td>
+                                    <td>{{product.qty}}</td>
+                                    <td><button ng-click="removeProduct(product)" class="btn btn-danger"><i class="fa fa-remove"></i> Remove</button></td>
+                                    <td>{{product.price * product.qty}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" style="text-align: right">Final Total:</td>
+                                    <td>600</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="text-align: right">
+                                        <a ng-click="checkOut()" href="" ng-show="cartProduct.length != 0" class="btn btn-success"><i class="fa fa-check"></i> Check Out</a>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-md-12" style="text-align: center; margin-top: 60px;">
                 &copy; Zubayer Ahamed
