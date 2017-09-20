@@ -16,6 +16,11 @@ public class PageController {
         return "index";
     }
     
+    @RequestMapping("/order_details")
+    public String orderDetailsPage() {
+        return "order_details";
+    }
+    
     @RequestMapping("/product_server/{id}")
     public String productServerPage(ModelMap modelMap ,@PathVariable("id") String id, HttpServletRequest request){
         //modelMap.addAttribute("val", id);

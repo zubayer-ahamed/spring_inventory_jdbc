@@ -110,9 +110,9 @@ myApp.controller("appCtrl", function ($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).then(function (response) {
-            //alert("order success");
+            $scope.os = 1;
         }, function (reason) {
-            //alert("order fail");
+            $scope.oe = 0;
         });
 
 
@@ -131,9 +131,9 @@ myApp.controller("appCtrl", function ($scope, $http) {
                     'Content-Type': 'application/json'
                 }
             }).then(function (response) {
-                //alert("detail success");
+                $scope.ods = 1;
             }, function (reason) {
-                //alert("detail fail");
+                $scope.ode = 0;
             });
 
 
@@ -167,12 +167,16 @@ myApp.controller("appCtrl", function ($scope, $http) {
                     'Content-Type': 'application/json'
                 }
             }).then(function (response) {
-                //alert("product update success");
+                $scope.ps = 1;
             }, function (reason) {
-                //alert("product update fail");
+                $scope.pe = 0;
             });
 
         }
+
+
+
+
 
     };
 
@@ -187,6 +191,58 @@ myApp.controller("appCtrl", function ($scope, $http) {
         });
     };
     $scope.productAgainRequest();
+
+
+
+});
+
+
+
+myApp.controller("orderDetailsChartCtrl", function ($scope, $http) {
+
+    //get All Customer
+    $scope.getAllCustomer = function () {
+        $http({
+            method: 'GET',
+            url: 'customers/allCustomer'
+        }).then(function (response) {
+            $scope.customers = response.data;
+        });
+    };
+    //call method to get all Customer
+    $scope.getAllCustomer();
+
+
+    //get all orders info
+    $scope.orders = [];
+    $scope.getAllOrders = function () {
+        $http({
+            method: 'GET',
+            url: 'orders/order'
+        }).then(function (response) {
+            $scope.orders = response.data;
+        });
+    };
+    //call method to get all orders info
+    $scope.getAllOrders();
+
+
+   
+
+
+    //get order details info by order id
+    $scope.clickedItem = {};
+    $scope.findOd = function (order) {
+        $scope.clickedItem = order;
+
+        $http({
+            method: 'GET',
+            url: 'orderdetails/getOdDetailsByOID/' + $scope.clickedItem.oid
+        }).then(function (response) {
+            $scope.orderDetails = response.data;
+        });
+
+    };
 
 
 

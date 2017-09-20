@@ -30,6 +30,11 @@ public class OrderDetailsDao {
         String sql = "select * from orderdetails";
         return jdbcTemplate.query(sql, new ODRowMapper());
     }
+    
+    public List<OrderDetails> getAllOrderDetailsByOrderID(int oid){
+        String sql = "select * from orderdetails where oid=?";
+        return jdbcTemplate.query(sql, new Object[]{oid}, new ODRowMapper());
+    }
     private static class ODRowMapper implements RowMapper<OrderDetails>{
 
         @Override

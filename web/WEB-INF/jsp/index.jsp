@@ -35,10 +35,10 @@
 
     </head>
     <body ng-controller="appCtrl">
-        
-        
-        
-        
+
+
+
+
         <div class="container">
 
             <div class="col-md-12 header">
@@ -60,6 +60,7 @@
                                 <li class="active"><a href="<%= request.getContextPath()%>/"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a href="<%= request.getContextPath()%>/product"><i class="fa fa-paypal"></i> Insert Product</a></li>
                                 <li><a href="<%= request.getContextPath()%>/customer"><i class="fa fa-user-plus"></i> Register Customer</a></li> 
+                                <li><a href="<%= request.getContextPath()%>/order_details"><i class="fa fa-area-chart"></i> Order Details</a></li> 
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -70,52 +71,43 @@
                 </nav>
             </div>
 
-            <div class="col-md-12 message">
-                <c:if test="${sm != null}">
-                    <div class="alert alert-success alert-dismissable fade in">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Success!</strong> ${sm}
-                    </div>
-
-                </c:if>
-                <c:if test="${em != null}">
-                    <div class="alert alert-danger alert-dismissable fade in">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Error!</strong> ${em}
-                    </div>
-                </c:if>
-
-
-            </div>
+            
 
 
             <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-4">
-                        Order No: <input name="oid" type="text" class="form-control" ng-model="oid = ${orderNo}" value="${orderNo}"/>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+
                     </div>
-                    <div class="col-md-4">
-                        Order Type: 
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="orderType" ng-model="orderType" value="sell">Sell
-                            </label> &nbsp; &nbsp; &nbsp;
-                            <label>
-                                <input type="radio" name="orderType" ng-model="orderType" value="purchase">Purchase
-                            </label>
+                    <div class="panel-body">
+                        <div class="col-md-4">
+                            Order No: <input name="oid" type="text" class="form-control" ng-model="oid = ${orderNo}" value="${orderNo}"/>
+                        </div>
+                        <div class="col-md-4">
+                            Order Type: 
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="orderType" ng-model="orderType" value="sell">Sell
+                                </label> &nbsp; &nbsp; &nbsp;
+                                <label>
+                                    <input type="radio" name="orderType" ng-model="orderType" value="purchase">Purchase
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            Order Date: <input ng-model="orderDate" name="orderDate" type="date" class="form-control"/>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        Order Date: <input ng-model="orderDate" name="orderDate" type="date" class="form-control"/>
-                    </div>
                 </div>
+
             </div>
 
 
 
 
 
-            <div class="col-md-12"  style="margin-top: 20px;">
+            <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-4" style="height: 360px;">
                         <div class="panel panel-primary" style="height: 100%">
@@ -180,7 +172,7 @@
                                     <input readonly="1" name="total" value="{{clickedProduct.price * qty}}" type="text" class="form-control" id="total">
                                 </div>
                                 <div class="form-group"> 
-                                    <button ng-click="addToCart()" type="submit" class="btn btn-success">Submit</button>
+                                    <button ng-click="addToCart()" type="submit" class="btn btn-success"><i class="fa fa-cart-plus"></i> Add To Cart</button>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +180,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12" style="text-align: center; margin-top: 60px;">
+            <div class="col-md-12" style="text-align: center; margin-top: 20px;">
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         <h3><i class="fa fa-cart-plus"></i> Cart <button class="btn btn-sm btn-success"> {{cartProduct.length}} </button></h3>
@@ -222,7 +214,7 @@
                                 </tr>
                                 <tr ng-show="cartProduct.length != 0">
                                     <td colspan="6" style="text-align: right">
-                                        <a ng-click="checkOut()" href="<%= request.getContextPath() %>" ng-show="cartProduct.length != 0" class="btn btn-success"><i class="fa fa-check"></i> Check Out</a>
+                                        <button data-toggle="modal" data-target="#checkoutModal" type="button" ng-show="cartProduct.length != 0" class="btn btn-success"><i class="fa fa-check"></i> Check Out</button>
                                     </td>
                                 </tr>
                             </tfoot>
@@ -236,7 +228,111 @@
                 || <a href="https://www.youtube.com/channel/UC4vVj7lKO7H4FohB3lv9dzA" target="_blank">Youtube</a>  || <a href="http://www.facebook.com/zubayerahamed" target="_blank">Facebook</a>
             </div>
 
+
+
+            <!-- checkoutModal -->
+            <div id="checkoutModal" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" align="center"><i class="fa fa-eye"></i> Review Your Order</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <td>Order ID</td>
+                                    <td>{{oid}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Order Type</td>
+                                    <td>{{orderType}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Order Date</td>
+                                    <td>{{orderDate| date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Customer ID</td>
+                                    <td>{{clickedCustomer.cid}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Amount</td>
+                                    <td>{{finalTotal}}</td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <br/>
+                            <br/>
+                            Order Details: <br/>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>NO</th>
+                                        <th>Product Name</th>
+                                        <th>Price</th>
+                                        <th>Qty</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="product in cartProduct">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{product.pname}}</td>
+                                        <td>{{product.price}}</td>
+                                        <td>{{product.qty}}</td>
+                                        <td>{{product.price * product.qty}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button  type="button" class="btn btn-warning" ><i class="fa fa-print"></i> Print</button>
+                            <button data-toggle="modal" data-target="#messageModal" ng-click="checkOut()" type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-check"></i> Confirm</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Modal -->
+            <div id="messageModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" align="center">Congratulation</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h1 style="color: green; text-align: center">
+                                Order Complete Successfully
+                            </h1>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="<%= request.getContextPath()%>" class="btn btn-default">Close</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
         </div>
+
+
+
+
+
+
+
+
+
 
     </body>
 </html>
