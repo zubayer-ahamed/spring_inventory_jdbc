@@ -163,15 +163,15 @@
                                 <i class="fa fa-sellsy"></i> Order Details
                             </div>
                             <div class="panel-body">
-                                <div class="form-group">
+                                <div class="form-group" ng-show="clickedProduct.pid != null">
                                     <label for="qty">Quantity:</label>
-                                    <input name="orderQty" ng-model="qty" type="text" class="form-control" id="qty" placeholder="Enter Quantity">
+                                    <input readonly="1" name="orderQty" ng-model="qty = 1" type="text" class="form-control" id="qty" placeholder="Enter Quantity">
                                 </div>
-                                <div class="form-group" ng-show="qty != 0">
+                                <div class="form-group" ng-show="qty != 0 && clickedProduct.pid != null">
                                     <label for="total">Total:</label>
                                     <input readonly="1" name="total" value="{{clickedProduct.price * qty}}" type="text" class="form-control" id="total">
                                 </div>
-                                <div class="form-group"> 
+                                <div class="form-group" ng-show="clickedProduct.pid != null && clickedCustomer.cid != null"> 
                                     <button ng-click="addToCart()" type="submit" class="btn btn-success"><i class="fa fa-cart-plus"></i> Add To Cart</button>
                                 </div>
                             </div>
@@ -202,7 +202,11 @@
                                     <td>{{$index + 1}}</td>
                                     <td>{{product.pname}}</td>
                                     <td>{{product.price}}</td>
-                                    <td>{{product.qty}}</td>
+                                    <td>
+                                        <button type="button" ng-click="decreaseQty(product)" class="btn btn-danger"><i class="fa fa-minus"></i></button>
+                                        &nbsp; &nbsp; {{product.qty}} &nbsp; &nbsp;
+                                        <button type="button" ng-click="increaseQty(product)" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                                    </td>
                                     <td><button ng-click="removeProduct(product)" class="btn btn-danger"><i class="fa fa-remove"></i> Remove</button></td>
                                     <td>{{product.price * product.qty}}</td>
                                 </tr>

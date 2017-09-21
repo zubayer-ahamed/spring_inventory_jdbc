@@ -47,10 +47,11 @@ myApp.controller("appCtrl", function ($scope, $http) {
     //add to cart
     $scope.cartProduct = [];
     $scope.addToCart = function () {
-        $scope.clickedProduct.qty = $scope.qty;
+
         $scope.status = true;
 
         if ($scope.cartProduct.length === 0) {
+            $scope.clickedProduct.qty = $scope.qty;
             $scope.cartProduct.push($scope.clickedProduct);
             $scope.status = false;
             //alert("first insert");
@@ -65,6 +66,7 @@ myApp.controller("appCtrl", function ($scope, $http) {
         }
 
         if ($scope.status === true) {
+            $scope.clickedProduct.qty = $scope.qty;
             $scope.cartProduct.push($scope.clickedProduct);
         }
 
@@ -82,7 +84,7 @@ myApp.controller("appCtrl", function ($scope, $http) {
     $scope.removeProduct = function (product) {
         $scope.rClickedProduct = product;
         $scope.value = -1;
-        alert($scope.cartProduct.indexOf($scope.rClickedProduct));
+        //alert($scope.cartProduct.indexOf($scope.rClickedProduct));
         $scope.value = $scope.cartProduct.indexOf($scope.rClickedProduct);
         if ($scope.value >= 0) {
             $scope.cartProduct.splice($scope.value, 1);
@@ -193,6 +195,42 @@ myApp.controller("appCtrl", function ($scope, $http) {
     $scope.productAgainRequest();
 
 
+    //increase and decrease cart product qty
+    $scope.increaseQty = function (product) {
+        //alert("hi");
+        $scope.qtyChangedProduct = product;
+        $scope.qtyChangedProduct.qty = parseInt($scope.qtyChangedProduct.qty) + 1;
+        for (var i = 0; i < $scope.cartProduct.length; i++) {
+            if ($scope.cartProduct[i].pid === $scope.qtyChangedProduct.pid) {
+                $scope.cartProduct[i].qty = $scope.qtyChangedProduct.qty;
+            }
+        }
+
+        $scope.finalTotal = 0;
+        for (var i = 0; i < $scope.cartProduct.length; i++) {
+            $scope.finalTotal = $scope.finalTotal + ($scope.cartProduct[i].price * $scope.cartProduct[i].qty);
+        }
+    };
+
+    $scope.decreaseQty = function (product) {
+        $scope.qtyChangedProduct = product;
+        $scope.qtyChangedProduct.qty = parseInt($scope.qtyChangedProduct.qty) - 1;
+        if ($scope.qtyChangedProduct.qty < 1) {
+            $scope.qtyChangedProduct.qty = 1;
+        }
+        for (var i = 0; i < $scope.cartProduct.length; i++) {
+            if ($scope.cartProduct[i].pid === $scope.qtyChangedProduct.pid) {
+                $scope.cartProduct[i].qty = $scope.qtyChangedProduct.qty;
+            }
+        }
+
+        $scope.finalTotal = 0;
+        for (var i = 0; i < $scope.cartProduct.length; i++) {
+            $scope.finalTotal = $scope.finalTotal + ($scope.cartProduct[i].price * $scope.cartProduct[i].qty);
+        }
+    };
+
+
 
 });
 
@@ -227,7 +265,7 @@ myApp.controller("orderDetailsChartCtrl", function ($scope, $http) {
     $scope.getAllOrders();
 
 
-   
+
 
 
     //get order details info by order id
@@ -243,6 +281,9 @@ myApp.controller("orderDetailsChartCtrl", function ($scope, $http) {
         });
 
     };
+
+
+
 
 
 
