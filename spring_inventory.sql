@@ -186,6 +186,29 @@ INSERT INTO `product` (`pid`,`pname`,`price`,`qty`) VALUES
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
 
+--
+-- Definition of table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `userId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `userName` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`userId`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`userId`,`userName`,`email`,`password`) VALUES 
+ (1,'admin','admin@gmail.com','1234');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
