@@ -27,5 +27,7 @@ public class PageController {
         request.setAttribute("val", id);
         return "product_server";
     }
+    
+    
 
 }

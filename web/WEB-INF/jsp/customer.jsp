@@ -30,6 +30,9 @@
         </style>
     </head>
     <body>
+        <c:if test="${user_id == null}">
+            <% response.sendRedirect("http://localhost:8080/spring_inventory_jdbc/home");%>
+        </c:if>
 
         <div class="container">
 
@@ -55,8 +58,13 @@
                                 <li><a href="<%= request.getContextPath()%>/order_details"><i class="fa fa-area-chart"></i> Order Details</a></li> 
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                <c:if test="${user_id == null}">
+                                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                    </c:if>
+                                    <c:if test="${user_id != null}">
+                                    <li><a href="<%= request.getContextPath()%>/logout"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
+                                    </c:if>
                             </ul>
                         </div>
                     </div>
@@ -162,6 +170,17 @@
                 &copy; Zubayer Ahamed
                 || <a href="https://www.youtube.com/channel/UC4vVj7lKO7H4FohB3lv9dzA" target="_blank">Youtube</a>  || <a href="http://www.facebook.com/zubayerahamed" target="_blank">Facebook</a>
             </div>
+
+        </div>
+
+
+        <div class="floating_div" style="text-align: center;width: 120px; height: 190px; border: 1px solid #DDD; box-shadow: 0px 0px 5px #DDD; position: fixed; right: 0px; bottom: 0px;">
+            <a href="http://www.facebook.com/zubayerahamed" target="_blank"><img src="<c:url value="/resources/img/zubayer.png"></c:url>" width="100%"/></a>
+            <br/>
+
+            Zubayer Ahamed <br/>
+            <a href="http://www.facebook.com/zubayerahamed" target="_blank"><i class="fa fa-facebook"></i> Facebook</a> <br/>
+            <a href="https://www.youtube.com/channel/UC4vVj7lKO7H4FohB3lv9dzA" target="_blank"><i class="fa fa-youtube"></i> Youtube</a>
 
         </div>
 
