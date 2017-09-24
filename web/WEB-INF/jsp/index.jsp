@@ -252,11 +252,11 @@
                                         <td>{{product.price}}</td>
                                         <td>
                                             <button type="button" ng-click="decreaseQty(product)" class="btn btn-danger"><i class="fa fa-minus"></i></button>
-                                            &nbsp; &nbsp; {{product.qty}} &nbsp; &nbsp;
+                                            &nbsp; &nbsp; {{product.cartQty}} &nbsp; &nbsp;
                                             <button type="button" ng-click="increaseQty(product)" class="btn btn-success"><i class="fa fa-plus"></i></button>
                                         </td>
                                         <td><button ng-click="removeProduct(product)" class="btn btn-danger"><i class="fa fa-remove"></i> Remove</button></td>
-                                        <td>{{product.price * product.qty}}</td>
+                                        <td>{{product.subTotal}}</td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
@@ -336,7 +336,7 @@
                                         <td>{{$index + 1}}</td>
                                         <td>{{product.pname}}</td>
                                         <td>{{product.price}}</td>
-                                        <td>{{product.qty}}</td>
+                                        <td>{{product.cartQty}}</td>
                                         <td>{{product.price * product.qty}}</td>
                                     </tr>
                                 </tbody>
