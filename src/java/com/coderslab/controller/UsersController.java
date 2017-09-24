@@ -31,7 +31,7 @@ public class UsersController {
             modelMap.addAttribute("em", "User Not Found, try again");
         }
         
-        return "index";
+        return "redirect:/";
         
     }
     

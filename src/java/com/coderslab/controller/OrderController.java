@@ -29,6 +29,7 @@ public class OrderController {
         modelMap.addAttribute("orderNo", orderDao.getOrderNo());
         modelMap.addAttribute("products", productDao.getAllProduct());
         modelMap.addAttribute("customers", customerDao.getAllCustomer());
+        modelMap.addAttribute("em", request.getParameter("em"));
         return "index";
     }
     

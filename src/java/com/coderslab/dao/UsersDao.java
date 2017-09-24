@@ -27,9 +27,13 @@ public class UsersDao {
 
     public Users getUser(String userName, String password) {
         String sql = "select * from users where userName=? and password=?";
-        Users u = jdbcTemplate.queryForObject(sql, new Object[]{userName, password}, new UsersMapper());
-        if(u != null){
-            return u;
+        try {
+            Users u = jdbcTemplate.queryForObject(sql, new Object[]{userName, password}, new UsersMapper());
+            if (u != null) {
+                return u;
+            }
+        } catch (Exception e) {
+            return null;
         }
         return null;
     }
@@ -38,7 +42,7 @@ public class UsersDao {
 
         @Override
         public Users mapRow(ResultSet rs, int rowNum) throws SQLException {
-            
+
             Users u = new Users();
             u.setUserId(rs.getInt("userId"));
             u.setUserName(rs.getString("userName"));
