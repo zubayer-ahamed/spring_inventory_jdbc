@@ -31,7 +31,7 @@ CREATE TABLE `customer` (
   `cname` varchar(45) NOT NULL,
   `phone` varchar(11) NOT NULL,
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `customer`
@@ -44,7 +44,7 @@ INSERT INTO `customer` (`cid`,`cname`,`phone`) VALUES
  (3,'uzzol','01670813134'),
  (4,'sharmin','01715491885'),
  (6,'bithi','01864203231'),
- (7,'arafat','01717777777');
+ (8,'akram','01515634889');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 
 
@@ -60,7 +60,7 @@ CREATE TABLE `orderdetails` (
   `price` double NOT NULL,
   `qty` int(10) unsigned NOT NULL,
   PRIMARY KEY (`odid`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orderdetails`
@@ -103,7 +103,15 @@ INSERT INTO `orderdetails` (`odid`,`oid`,`pid`,`price`,`qty`) VALUES
  (33,24,1,500,1),
  (34,25,1,500,1),
  (35,26,10,5500,1),
- (36,26,9,300,1);
+ (36,26,9,300,1),
+ (37,27,4,700,2),
+ (38,27,1,500,1),
+ (39,28,5,15000,1),
+ (40,28,1,500,1),
+ (41,29,7,76000,1),
+ (42,29,1,500,4),
+ (43,29,8,1600,1),
+ (44,30,1,500,5);
 /*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
 
 
@@ -119,7 +127,7 @@ CREATE TABLE `orders` (
   `orderType` varchar(45) NOT NULL,
   `orderDate` date NOT NULL,
   PRIMARY KEY (`oid`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orders`
@@ -152,7 +160,11 @@ INSERT INTO `orders` (`oid`,`cid`,`total`,`orderType`,`orderDate`) VALUES
  (23,1,500,'sell','2017-09-20'),
  (24,1,500,'sell','2017-09-20'),
  (25,1,500,'sell','2017-09-20'),
- (26,7,5800,'sell','2017-09-15');
+ (26,7,5800,'sell','2017-09-15'),
+ (27,1,1900,'sell','2017-09-22'),
+ (28,1,15500,'sell','2017-09-24'),
+ (29,1,79600,'sell','2017-09-30'),
+ (30,2,6500,'sell','2017-10-11');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 
@@ -167,7 +179,7 @@ CREATE TABLE `product` (
   `price` double NOT NULL,
   `qty` int(10) unsigned NOT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `product`
@@ -175,14 +187,15 @@ CREATE TABLE `product` (
 
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
 INSERT INTO `product` (`pid`,`pname`,`price`,`qty`) VALUES 
- (1,'shirt',500,91),
- (4,'pant',700,18),
- (5,'mobile',15000,50),
+ (1,'shirt',500,80),
+ (4,'pant',700,16),
+ (5,'mobile',15000,49),
  (6,'sunglass',4000,40),
- (7,'laptop',76000,80),
- (8,'bag',1600,190),
+ (7,'laptop',76000,79),
+ (8,'bag',1600,189),
  (9,'mouse',300,119),
- (10,'hdd',5500,119);
+ (10,'hdd',5500,119),
+ (11,'printer',5000,100);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
 

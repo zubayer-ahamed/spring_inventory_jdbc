@@ -62,17 +62,17 @@
                                     <li><a href="<%= request.getContextPath()%>/product"><i class="fa fa-paypal"></i> Insert Product</a></li>
                                     <li><a href="<%= request.getContextPath()%>/customer"><i class="fa fa-user-plus"></i> Register Customer</a></li> 
                                     <li><a href="<%= request.getContextPath()%>/order_details"><i class="fa fa-area-chart"></i> Order Details</a></li> 
-                                </c:if>
-                                    
+                                    </c:if>
+
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <c:if test="${user_id == null}">
                                     <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                                     <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                                </c:if>
-                                <c:if test="${user_id != null}">
+                                    </c:if>
+                                    <c:if test="${user_id != null}">
                                     <li><a href="<%= request.getContextPath()%>/logout"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
-                                </c:if>
+                                    </c:if>
                             </ul>
                         </div>
                     </div>
@@ -81,7 +81,8 @@
 
             <c:if test="${user_id == null}">    
 
-                <div class="col-md-12">
+
+                <div class="col-md-4 col-md-offset-4">
                     <div style="margin: 0 auto; width: 100%;">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -115,6 +116,7 @@
                         </div>
                     </div>
                 </div>
+
 
             </c:if>
 
